@@ -14,7 +14,7 @@ struct Vector2 {
 };
 
 // To generate a random string, especially for the IDs of our components
-std::string randomStringGenerator(int stringLength);
+std::string randomStringGenerator(int stringLength = 26);
 
 
 #endif //VECTOR2_H
