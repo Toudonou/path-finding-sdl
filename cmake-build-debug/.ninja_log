@@ -1,0 +1,10 @@
+# ninja log v5
+8	143	7381682110543273	CMakeFiles/path_findind_sdl.dir/main.cpp.obj	cc74fb2ae01313f6
+2315	2531	7381923017478088	path_findind_sdl.exe	4ae84a5a7e989530
+18	518	7381924288900828	build.ninja	c96428b7dbb108e0
+30	2022	7381923012457519	CMakeFiles/path_findind_sdl.dir/PFS/Game.cpp.obj	7b0ec7c3fa3836ae
+15	1939	7381778048478378	CMakeFiles/path_findind_sdl.dir/PFS/TextureManager.cpp.obj	fd805834e7d94ef4
+38	1994	7381923012165047	CMakeFiles/path_findind_sdl.dir/PFS/Sprite.cpp.obj	9c1096e0bf4ff498
+44	2315	7381923015373657	CMakeFiles/path_findind_sdl.dir/PFS/RendererManager.cpp.obj	752821265285f47c
+46	128	7381787840263366	CMakeFiles/path_findind_sdl.dir/PFS/Wall.cpp.obj	5a299ec551daaed0
+50	2001	7381923012238640	CMakeFiles/path_findind_sdl.dir/PFS/Tile.cpp.obj	f60eb436a591710a
