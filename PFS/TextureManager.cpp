@@ -17,10 +17,16 @@ TextureManager *TextureManager::GetInstance() {
 
 // For initialization
 void TextureManager::Init(SDL_Renderer *renderer) {
-    m_renderer = renderer;
-    if (m_renderer == nullptr) {
-        SDL_Log("Error: Couldn't create the renderer = %s", SDL_GetError());
+    if(m_isInitialize) {
+        SDL_Log("Attempt to initialize the texture manager more than once");
+        return;
     }
+
+    if (renderer == nullptr) {
+        SDL_Log("The renderer must be not null");
+        return;
+    }
+    m_renderer = renderer;
     m_isInitialize = true;
 }
 

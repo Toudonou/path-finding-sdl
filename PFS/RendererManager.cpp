@@ -16,6 +16,16 @@ RendererManager *RendererManager::GetInstance() {
 }
 
 void RendererManager::Init(SDL_Renderer *renderer) {
+    if(m_isInitialize) {
+        SDL_Log("Attempt to initialize the renderer manager more than once");
+        return;
+    }
+
+    if (renderer == nullptr) {
+        SDL_Log("The renderer must be not null");
+        return;
+    }
+
     s_render = renderer;
     m_isInitialize = true;
 }
@@ -57,4 +67,8 @@ void RendererManager::Quit() {
     m_isInitialize = false;
     m_sprites.clear();
     m_sprites_id.clear();
+}
+
+RendererManager::~RendererManager() {
+    delete s_instance;
 }

@@ -6,6 +6,7 @@
 
 #include <SDL.h>
 
+#include "InputManager.h"
 #include "Level.h"
 #include "RendererManager.h"
 #include "TextureManager.h"
@@ -20,6 +21,11 @@ Game *Game::GetInstance() {
 
 // For initialization
 void Game::Init(const int windowWidth, const int windowHeight) {
+    if(m_isInitialize) {
+        SDL_Log("Attempt to initialize the game engine more than once");
+        return;
+    }
+
     m_width = windowWidth;
     m_height = windowHeight;
 
@@ -49,6 +55,7 @@ void Game::Init(const int windowWidth, const int windowHeight) {
     TextureManager::GetInstance()->Init(m_render);
     // Initialize the texture manager before the renderer manager
     RendererManager::GetInstance()->Init(m_render);
+    InputManager::GetInstance()->Init();
 }
 
 void Game::Run() {
@@ -57,25 +64,20 @@ void Game::Run() {
         return;
     }
 
-    const auto level = new Level(10, {50, 50});
+    const int nbrTile = (m_width < m_height ? m_width : m_height) / 48;
+    const auto level = new Level(nbrTile, {m_width / 2 - (nbrTile * 48) / 2, m_height / 2 - (nbrTile * 48) / 2});
 
     // Game loop
     while (m_isRunning) {
-        SDL_Event event;
-        // Event handler
-        while (SDL_PollEvent(&event)) {
-            // If the window is close
-            if (event.type == SDL_QUIT) m_isRunning = false;
-        }
+        if(InputManager::GetInstance()->QuitEvent()) m_isRunning = false;
 
         RendererManager::GetInstance()->Update();
-
     }
 
     delete level;
 }
 
-SDL_Renderer * Game::GetRenderer() const {
+SDL_Renderer *Game::GetRenderer() const {
     if (m_isInitialize == false) {
         SDL_Log("The game must be initialized");
         return nullptr;
@@ -88,6 +90,7 @@ void Game::Quit() {
     m_isRunning = false;
     m_isInitialize = false;
 
+    InputManager::GetInstance()->Quit();
     // Quit the renderer manager before the texture manager
     RendererManager::GetInstance()->Quit();
     TextureManager::GetInstance()->Quit();

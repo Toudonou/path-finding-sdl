@@ -38,7 +38,7 @@ private:
 
     RendererManager() = default;
 
-    ~RendererManager() = default;
+    ~RendererManager();
 };
 
 
