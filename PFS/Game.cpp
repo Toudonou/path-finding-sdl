@@ -6,6 +6,7 @@
 
 #include <SDL.h>
 
+#include "Level.h"
 #include "RendererManager.h"
 #include "TextureManager.h"
 
@@ -56,12 +57,7 @@ void Game::Run() {
         return;
     }
 
-    const auto bg = new Sprite("E:/Dev/path-finding-sdl/assets/overlay.bmp");
-    const auto wall = new Sprite("E:/Dev/path-finding-sdl/assets/tile-wall.bmp");
-    wall->SetPosition({40, 40});
-
-    RendererManager::GetInstance()->AddSprite(bg);
-    RendererManager::GetInstance()->AddSprite(wall);
+    const auto level = new Level(10, {50, 50});
 
     // Game loop
     while (m_isRunning) {
@@ -75,6 +71,8 @@ void Game::Run() {
         RendererManager::GetInstance()->Update();
 
     }
+
+    delete level;
 }
 
 SDL_Renderer * Game::GetRenderer() const {
@@ -100,4 +98,8 @@ void Game::Quit() {
 
     // Clean up.
     SDL_Quit();
+}
+
+Game::~Game() {
+    delete s_instance;
 }

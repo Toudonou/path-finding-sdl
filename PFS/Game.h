@@ -36,8 +36,10 @@ private:
 
     Game() = default;
 
-    ~Game() = default;
+    ~Game();
 };
+
+
 
 
 #endif //GAME_H

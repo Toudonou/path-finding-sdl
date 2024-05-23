@@ -5,7 +5,6 @@
 #include <algorithm>
 
 #include "RendererManager.h"
-#include "Game.h"
 #include "Sprite.h"
 
 RendererManager *RendererManager::s_instance = nullptr;
@@ -17,7 +16,7 @@ RendererManager *RendererManager::GetInstance() {
 }
 
 void RendererManager::Init(SDL_Renderer *renderer) {
-    s_render = Game::GetInstance()->GetRenderer();
+    s_render = renderer;
     m_isInitialize = true;
 }
 

@@ -9,7 +9,7 @@
 #include <string>
 #include <SDL.h>
 
-#include "Vector2.h"
+#include "defines.h"
 
 class Sprite {
 public:
