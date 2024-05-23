@@ -28,8 +28,9 @@ void InputManager::Init() {
         memset(m_keysDown, 0, SDL_NUM_SCANCODES);
 
         m_isInitialize = true;
+    } else {
+        SDL_Log("Attempt to initialize input manager more than once");
     }
-    SDL_Log("Attempt to initialize input manager more than once");
 }
 
 bool InputManager::KeyDown(const SDL_Scancode key) const {
@@ -70,7 +71,7 @@ bool InputManager::MouseButtonPressed(const int button) const {
     }
 
     // Only the left, the right and the middle buttons will be available
-    if (1 <= button && button < 3) {
+    if (1 <= button && button <= 3) {
         SDL_Log("Invalid mouse button!");
         return false;
     }
@@ -86,6 +87,9 @@ void InputManager::Update() {
 
     while (SDL_PollEvent(&m_event)) {
         if (m_event.type == SDL_QUIT) s_quitApplication = true;
+
+        // Updating mouse position
+        m_mousePosition = {m_event.motion.x, m_event.motion.y};
 
         switch (m_event.type) {
             case SDL_KEYDOWN:

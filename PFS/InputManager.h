@@ -38,7 +38,7 @@ public:
     void Update();
 
     // If quit application event is emit
-    bool QuitEvent() const;
+    [[nodiscard]] bool QuitEvent() const;
 
     // To quit the input manager
     void Quit();
