@@ -56,7 +56,7 @@ private:
     char *m_keysDown = nullptr;
 
     // Store mouse's buttons
-    char m_mouseButtons[3]{};
+    char m_mouseButtons[4]{};
 
     // Store mouse position
     Vector2 m_mousePosition{};

@@ -39,8 +39,8 @@ bool InputManager::KeyDown(const SDL_Scancode key) const {
         return false;
     }
 
-    if (0 <= key && key < SDL_NUM_SCANCODES) {
-        SDL_Log("Invalid keyboard key!");
+    if (!(0 <= key && key < SDL_NUM_SCANCODES)) {
+        SDL_Log("Invalid keyboard key! : %d", key);
         return false;
     }
 
@@ -56,8 +56,8 @@ bool InputManager::KeyPressed(const SDL_Scancode key) const {
         return false;
     }
 
-    if (0 <= key && key < SDL_NUM_SCANCODES) {
-        SDL_Log("Invalid keyboard key!");
+    if (!(0 <= key && key < SDL_NUM_SCANCODES)) {
+        SDL_Log("Invalid keyboard key! : %d", key);
         return false;
     }
 
@@ -71,8 +71,8 @@ bool InputManager::MouseButtonPressed(const int button) const {
     }
 
     // Only the left, the right and the middle buttons will be available
-    if (1 <= button && button <= 3) {
-        SDL_Log("Invalid mouse button!");
+    if (!(1 <= button && button < 4)) {
+        SDL_Log("Invalid mouse button! : %d", button);
         return false;
     }
 
