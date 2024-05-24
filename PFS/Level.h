@@ -4,25 +4,36 @@
 
 #ifndef LEVEL_H
 #define LEVEL_H
-#include "Vector2.h"
 
+#include "Tile.h"
+#include "defines.h"
 
 class Level {
-
 public:
-    Level(int nbrTiles, Vector2 position);
+    Level(int nbrTilesBySide, Vector2 position);
+
     ~Level();
 
     void Update();
 
 private:
     Vector2 m_position{};
-    int m_nbrTile;
+
+    // Store the number of tiles by side
+    int m_nbrTileBySide;
+
+    // Store the index of actual target
+    Vector2 m_targetIndex{};
+
+    // Store the current mode of the level
+    MODE m_mode;
 
     // Store all the tile in the game
+    Tile ***m_tiles = nullptr;
 
+    // Update tiles orientation
+    void UpdateTiles() const;
 };
-
 
 
 #endif //LEVEL_H

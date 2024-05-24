@@ -21,7 +21,7 @@ Game *Game::GetInstance() {
 
 // For initialization
 void Game::Init(const int windowWidth, const int windowHeight) {
-    if(m_isInitialize) {
+    if (m_isInitialize) {
         SDL_Log("Attempt to initialize the game engine more than once");
         return;
     }
@@ -64,14 +64,18 @@ void Game::Run() {
         return;
     }
 
-    const int nbrTile = (m_width < m_height ? m_width : m_height) / 48;
+    int nbrTile = (m_width < m_height ? m_width : m_height) / 48;
+    nbrTile -= 1 - nbrTile % 2;
+
     const auto level = new Level(nbrTile, {m_width / 2 - (nbrTile * 48) / 2, m_height / 2 - (nbrTile * 48) / 2});
 
     // Game loop
     while (m_isRunning) {
-        if(InputManager::GetInstance()->QuitEvent()) m_isRunning = false;
+        level->Update();
 
+        if (InputManager::GetInstance()->QuitEvent()) m_isRunning = false;
         RendererManager::GetInstance()->Update();
+        InputManager::GetInstance()->Update();
     }
 
     delete level;

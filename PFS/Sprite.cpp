@@ -12,7 +12,7 @@
 Sprite::Sprite(const std::string &file_path) {
     m_position = {0, 0};
 
-    m_id = randomStringGenerator(26) + std::to_string(std::time(nullptr));
+    m_id = randomStringGenerator() + std::to_string(std::time(nullptr));
     m_texture = TextureManager::GetInstance()->load(file_path);
 
     m_rect = SDL_Rect(m_position.x, m_position.y, 0, 0);
@@ -24,7 +24,7 @@ Sprite::Sprite(const std::string &file_path) {
 Sprite::Sprite(const std::string &file_path, const Vector2 position) {
     m_position = position;
 
-    m_id = randomStringGenerator(26) + std::to_string(std::time(nullptr));
+    m_id = randomStringGenerator() + std::to_string(std::time(nullptr));
     m_texture = TextureManager::GetInstance()->load(file_path);
 
     m_rect = SDL_Rect(m_position.x, m_position.y, 0, 0);
