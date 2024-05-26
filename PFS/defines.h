@@ -20,6 +20,10 @@ struct Vector2 {
     bool operator==(const Vector2 &other) const {
         return x == other.x && y == other.y;
     }
+
+    Vector2 operator+(const Vector2 &other) const {
+        return {x + other.x, y + other.y};
+    }
 };
 
 enum TILE {

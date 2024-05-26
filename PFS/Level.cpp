@@ -53,6 +53,7 @@ void Level::Update() {
         m_mode == MODE::EDIT ? SDL_Log("Edit mode") : SDL_Log("Simulation mode");
     }
 
+    // Reset all the tiles
     for (int i = 0; i < m_nbrTileBySide; i++) {
         for (int j = 0; j < m_nbrTileBySide; ++j) {
             tempSprite = m_tiles[i][j];
@@ -62,7 +63,8 @@ void Level::Update() {
         }
     }
 
-    UpdateTiles();
+    // Update the tiles direction
+    UpdateTilesDirection();
 
     for (int i = 0; i < m_nbrTileBySide; i++) {
         for (int j = 0; j < m_nbrTileBySide; ++j) {
@@ -116,6 +118,14 @@ void Level::Update() {
                         tempSprite->SetType(TILE::LEFT);
                     } else if (direction == Vector2::RIGHT) {
                         tempSprite->SetType(TILE::RIGHT);
+                    } else if (direction == Vector2::UP + Vector2::LEFT) {
+                        tempSprite->SetType(TILE::UP_LEFT);
+                    } else if (direction == Vector2::DOWN + Vector2::LEFT) {
+                        tempSprite->SetType(TILE::DOWN_LEFT);
+                    } else if (direction == Vector2::UP + Vector2::RIGHT) {
+                        tempSprite->SetType(TILE::UP_RIGHT);
+                    } else if (direction == Vector2::DOWN + Vector2::RIGHT) {
+                        tempSprite->SetType(TILE::DOWN_RIGHT);
                     }
                     break;
             }
@@ -125,7 +135,8 @@ void Level::Update() {
     }
 }
 
-void Level::UpdateTiles() const {
+// TODO : Can be improve
+void Level::UpdateTilesDirection() const {
     std::queue<Vector2> queue;
     Tile *currentTile = nullptr;
     Vector2 currentPosition = {0, 0};
@@ -141,7 +152,9 @@ void Level::UpdateTiles() const {
         queue.pop();
 
         if (currentTile->GetType() != TILE::WALL) {
-            //
+            // 0    0    0
+            // j    i    0
+            // 0    0    0
             if (currentPosition.x - 1 >= 0 && m_tiles[currentPosition.x - 1][currentPosition.y]->GetColor() ==
                 COLOR::UNVISITED) {
                 m_tiles[currentPosition.x - 1][currentPosition.y]->AddDistanceToTarget(
@@ -154,7 +167,9 @@ void Level::UpdateTiles() const {
                 queue.push({currentPosition.x - 1, currentPosition.y});
             }
 
-            //
+            // 0    0    0
+            // 0    i    j
+            // 0    0    0
             if (currentPosition.x + 1 < m_nbrTileBySide && m_tiles[currentPosition.x + 1][currentPosition.y]->GetColor()
                 == COLOR::UNVISITED) {
                 m_tiles[currentPosition.x + 1][currentPosition.y]->AddDistanceToTarget(
@@ -167,7 +182,9 @@ void Level::UpdateTiles() const {
                 queue.push({currentPosition.x + 1, currentPosition.y});
             }
 
-            //
+            // 0    j    0
+            // 0    i    0
+            // 0    0    0
             if (currentPosition.y - 1 >= 0 && m_tiles[currentPosition.x][currentPosition.y - 1]->GetColor() ==
                 COLOR::UNVISITED) {
                 m_tiles[currentPosition.x][currentPosition.y - 1]->AddDistanceToTarget(
@@ -180,7 +197,9 @@ void Level::UpdateTiles() const {
                 queue.push({currentPosition.x, currentPosition.y - 1});
             }
 
-            //
+            // 0    0    0
+            // 0    i    0
+            // 0    j    0
             if (currentPosition.y + 1 < m_nbrTileBySide && m_tiles[currentPosition.x][currentPosition.y + 1]->GetColor()
                 == COLOR::UNVISITED) {
                 m_tiles[currentPosition.x][currentPosition.y + 1]->AddDistanceToTarget(
@@ -191,6 +210,72 @@ void Level::UpdateTiles() const {
 
                 m_tiles[currentPosition.x][currentPosition.y + 1]->SetColor(COLOR::VISITED);
                 queue.push({currentPosition.x, currentPosition.y + 1});
+            }
+
+            // j    0    0
+            // 0    i    0
+            // k    0    0
+            if (currentPosition.x - 1 >= 0 && m_tiles[currentPosition.x - 1][currentPosition.y]->GetType() !=
+                TILE::WALL) {
+                // j
+                if (currentPosition.y - 1 >= 0 && m_tiles[currentPosition.x][currentPosition.y - 1]->GetType() !=
+                    TILE::WALL && m_tiles[currentPosition.x - 1][currentPosition.y - 1]->GetColor() ==
+                    COLOR::UNVISITED) {
+                    m_tiles[currentPosition.x - 1][currentPosition.y - 1]->AddDistanceToTarget(
+                        currentTile->GetDistanceToTarget());
+
+                    m_tiles[currentPosition.x - 1][currentPosition.y - 1]->SetDirectionToTarget(
+                        Vector2::DOWN + Vector2::RIGHT);
+
+                    m_tiles[currentPosition.x - 1][currentPosition.y - 1]->SetColor(COLOR::VISITED);
+                    queue.push({currentPosition.x - 1, currentPosition.y - 1});
+                }
+                // k
+                if (currentPosition.y + 1 < m_nbrTileBySide && m_tiles[currentPosition.x][currentPosition.y + 1]->
+                    GetType() != TILE::WALL && m_tiles[currentPosition.x - 1][currentPosition.y + 1]->GetColor() ==
+                    COLOR::UNVISITED) {
+                    m_tiles[currentPosition.x - 1][currentPosition.y + 1]->AddDistanceToTarget(
+                        currentTile->GetDistanceToTarget());
+
+                    m_tiles[currentPosition.x - 1][currentPosition.y + 1]->SetDirectionToTarget(
+                        Vector2::UP + Vector2::RIGHT);
+
+                    m_tiles[currentPosition.x - 1][currentPosition.y + 1]->SetColor(COLOR::VISITED);
+                    queue.push({currentPosition.x - 1, currentPosition.y + 1});
+                }
+            }
+
+            // 0    0    j
+            // 0    i    0
+            // 0    0    k
+            if (currentPosition.x + 1 < m_nbrTileBySide && m_tiles[currentPosition.x + 1][currentPosition.y]->GetType()
+                != TILE::WALL) {
+                // j
+                if (currentPosition.y - 1 >= 0 && m_tiles[currentPosition.x][currentPosition.y - 1]->GetType() !=
+                    TILE::WALL && m_tiles[currentPosition.x + 1][currentPosition.y - 1]->GetColor() ==
+                    COLOR::UNVISITED) {
+                    m_tiles[currentPosition.x + 1][currentPosition.y - 1]->AddDistanceToTarget(
+                        currentTile->GetDistanceToTarget());
+
+                    m_tiles[currentPosition.x + 1][currentPosition.y - 1]->SetDirectionToTarget(
+                        Vector2::DOWN + Vector2::LEFT);
+
+                    m_tiles[currentPosition.x + 1][currentPosition.y - 1]->SetColor(COLOR::VISITED);
+                    queue.push({currentPosition.x + 1, currentPosition.y - 1});
+                }
+                // k
+                if (currentPosition.y + 1 < m_nbrTileBySide && m_tiles[currentPosition.x][currentPosition.y + 1]->
+                    GetType() != TILE::WALL && m_tiles[currentPosition.x + 1][currentPosition.y + 1]->GetColor() ==
+                    COLOR::UNVISITED) {
+                    m_tiles[currentPosition.x + 1][currentPosition.y + 1]->AddDistanceToTarget(
+                        currentTile->GetDistanceToTarget());
+
+                    m_tiles[currentPosition.x + 1][currentPosition.y + 1]->SetDirectionToTarget(
+                        Vector2::UP + Vector2::LEFT);
+
+                    m_tiles[currentPosition.x + 1][currentPosition.y + 1]->SetColor(COLOR::VISITED);
+                    queue.push({currentPosition.x + 1, currentPosition.y + 1});
+                }
             }
         }
     }

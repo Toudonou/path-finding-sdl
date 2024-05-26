@@ -32,7 +32,7 @@ private:
     Tile ***m_tiles = nullptr;
 
     // Update tiles orientation
-    void UpdateTiles() const;
+    void UpdateTilesDirection() const;
 };
 
 

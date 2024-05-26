@@ -5,11 +5,8 @@
 #ifndef TILE_H
 #define TILE_H
 #include "Sprite.h"
-#include "Vector2.h"
+#include "defines.h"
 
-enum TILE {
-    WALL, EMPTY, TARGET, UP, DOWN, DOWN_LEFT, DOWN_RIGHT, LEFT, RIGHT, UP_LEFT, UP_RIGHT
-};
 
 class Tile {
 public:
@@ -20,8 +17,18 @@ public:
     void Update();
 
     void SetType(TILE type);
+    [[nodiscard]] __forceinline TILE GetType() const { return m_type; }
 
-    [[nodiscard]] inline TILE GetType() const { return m_type; };
+    void SetColor(COLOR color);
+    [[nodiscard]] __forceinline COLOR GetColor() const { return m_color; }
+
+    [[nodiscard]] __forceinline Vector2 GetPosition() const { return m_position; }
+
+    void AddDistanceToTarget(int distance);
+    [[nodiscard]] __forceinline int GetDistanceToTarget() const { return m_distanceToTarget; }
+
+    void SetDirectionToTarget(Vector2 directionToTarget);
+    [[nodiscard]] __forceinline Vector2 GetDirectionToTarget() const { return m_directionToTarget; }
 
 private:
     Vector2 m_position{};
@@ -30,7 +37,12 @@ private:
     Sprite *m_sprite = nullptr;
 
     // Store the tile's type
-    TILE m_type;
+    TILE m_type{};
+
+    COLOR m_color;
+
+    int m_distanceToTarget;
+    Vector2 m_directionToTarget{};
 };
 
 
