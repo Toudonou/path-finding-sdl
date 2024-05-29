@@ -9,8 +9,9 @@
 #include "defines.h"
 
 class Level {
+
 public:
-    Level(int nbrTilesBySide, Vector2 position);
+    Level(int nbrTilesRow, int nbrTilesColumn, Vector2 position);
 
     ~Level();
 
@@ -20,7 +21,8 @@ private:
     Vector2 m_position{};
 
     // Store the number of tiles by side
-    int m_nbrTileBySide;
+    int m_tilesRow;
+    int m_tilesColumn;
 
     // Store the index of actual target
     Vector2 m_targetIndex{};

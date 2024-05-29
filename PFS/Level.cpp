@@ -9,28 +9,30 @@
 #include "InputManager.h"
 
 
-Level::Level(const int nbrTilesBySide, const Vector2 position) {
+Level::Level(const int nbrTilesRow,const int nbrTilesColumn, const Vector2 position) {
     m_position = position;
-    m_nbrTileBySide = nbrTilesBySide;
-    m_targetIndex = {m_nbrTileBySide / 2, m_nbrTileBySide / 2};
+    m_tilesRow = nbrTilesRow;
+    m_tilesColumn = nbrTilesColumn;
+
+    m_targetIndex = {m_tilesRow / 2, m_tilesColumn / 2};
     m_mode = MODE::SIMULATION;
 
-    m_tiles = static_cast<Tile ***>(calloc(m_nbrTileBySide, sizeof(Tile **)));
+    m_tiles = static_cast<Tile ***>(calloc(m_tilesRow, sizeof(Tile **)));
     // TODO: To Improve
     if (m_tiles == nullptr) {
         SDL_Log("Error during m_tiles initialization");
         exit(-1);
     }
 
-    for (int i = 0; i < m_nbrTileBySide; i++) {
-        m_tiles[i] = static_cast<Tile **>(calloc(m_nbrTileBySide, sizeof(Tile *)));
+    for (int i = 0; i < m_tilesRow; i++) {
+        m_tiles[i] = static_cast<Tile **>(calloc(m_tilesColumn, sizeof(Tile *)));
         // TODO: To Improve
         if (m_tiles[i] == nullptr) {
             SDL_Log("Error during m_tiles initialization");
             exit(-1);
         }
 
-        for (int j = 0; j < m_nbrTileBySide; ++j) {
+        for (int j = 0; j < m_tilesColumn; ++j) {
             m_tiles[i][j] = new Tile({m_position.x + 48 * i, m_position.y + 48 * j}, TILE::EMPTY);
         }
     }
@@ -54,8 +56,8 @@ void Level::Update() {
     }
 
     // Reset all the tiles
-    for (int i = 0; i < m_nbrTileBySide; i++) {
-        for (int j = 0; j < m_nbrTileBySide; ++j) {
+    for (int i = 0; i < m_tilesRow; i++) {
+        for (int j = 0; j < m_tilesColumn; ++j) {
             tempSprite = m_tiles[i][j];
             tempSprite->SetDirectionToTarget(Vector2::ZERO);
             tempSprite->SetColor(COLOR::UNVISITED); // Reset all the tiles color
@@ -66,8 +68,8 @@ void Level::Update() {
     // Update the tiles direction
     UpdateTilesDirection();
 
-    for (int i = 0; i < m_nbrTileBySide; i++) {
-        for (int j = 0; j < m_nbrTileBySide; ++j) {
+    for (int i = 0; i < m_tilesRow; i++) {
+        for (int j = 0; j < m_tilesColumn; ++j) {
             tempSprite = m_tiles[i][j];
 
             switch (m_mode) {
@@ -170,7 +172,7 @@ void Level::UpdateTilesDirection() const {
             // 0    0    0
             // 0    i    j
             // 0    0    0
-            if (currentPosition.x + 1 < m_nbrTileBySide && m_tiles[currentPosition.x + 1][currentPosition.y]->GetColor()
+            if (currentPosition.x + 1 < m_tilesRow && m_tiles[currentPosition.x + 1][currentPosition.y]->GetColor()
                 == COLOR::UNVISITED) {
                 m_tiles[currentPosition.x + 1][currentPosition.y]->AddDistanceToTarget(
                     currentTile->GetDistanceToTarget());
@@ -200,7 +202,7 @@ void Level::UpdateTilesDirection() const {
             // 0    0    0
             // 0    i    0
             // 0    j    0
-            if (currentPosition.y + 1 < m_nbrTileBySide && m_tiles[currentPosition.x][currentPosition.y + 1]->GetColor()
+            if (currentPosition.y + 1 < m_tilesColumn && m_tiles[currentPosition.x][currentPosition.y + 1]->GetColor()
                 == COLOR::UNVISITED) {
                 m_tiles[currentPosition.x][currentPosition.y + 1]->AddDistanceToTarget(
                     currentTile->GetDistanceToTarget());
@@ -231,7 +233,7 @@ void Level::UpdateTilesDirection() const {
                     queue.push({currentPosition.x - 1, currentPosition.y - 1});
                 }
                 // k
-                if (currentPosition.y + 1 < m_nbrTileBySide && m_tiles[currentPosition.x][currentPosition.y + 1]->
+                if (currentPosition.y + 1 < m_tilesColumn && m_tiles[currentPosition.x][currentPosition.y + 1]->
                     GetType() != TILE::WALL && m_tiles[currentPosition.x - 1][currentPosition.y + 1]->GetColor() ==
                     COLOR::UNVISITED) {
                     m_tiles[currentPosition.x - 1][currentPosition.y + 1]->AddDistanceToTarget(
@@ -248,7 +250,7 @@ void Level::UpdateTilesDirection() const {
             // 0    0    j
             // 0    i    0
             // 0    0    k
-            if (currentPosition.x + 1 < m_nbrTileBySide && m_tiles[currentPosition.x + 1][currentPosition.y]->GetType()
+            if (currentPosition.x + 1 < m_tilesRow && m_tiles[currentPosition.x + 1][currentPosition.y]->GetType()
                 != TILE::WALL) {
                 // j
                 if (currentPosition.y - 1 >= 0 && m_tiles[currentPosition.x][currentPosition.y - 1]->GetType() !=
@@ -264,7 +266,7 @@ void Level::UpdateTilesDirection() const {
                     queue.push({currentPosition.x + 1, currentPosition.y - 1});
                 }
                 // k
-                if (currentPosition.y + 1 < m_nbrTileBySide && m_tiles[currentPosition.x][currentPosition.y + 1]->
+                if (currentPosition.y + 1 < m_tilesColumn && m_tiles[currentPosition.x][currentPosition.y + 1]->
                     GetType() != TILE::WALL && m_tiles[currentPosition.x + 1][currentPosition.y + 1]->GetColor() ==
                     COLOR::UNVISITED) {
                     m_tiles[currentPosition.x + 1][currentPosition.y + 1]->AddDistanceToTarget(

@@ -64,10 +64,15 @@ void Game::Run() {
         return;
     }
 
-    int nbrTile = (m_width < m_height ? m_width : m_height) / 48;
-    nbrTile -= 1 - nbrTile % 2;
+    int nbrTileWidth = m_width / 48;
+    int nbrTileHeight = m_height / 48;
 
-    const auto level = new Level(nbrTile, {m_width / 2 - (nbrTile * 48) / 2, m_height / 2 - (nbrTile * 48) / 2});
+    nbrTileWidth -= 1 - nbrTileWidth % 2;
+    nbrTileHeight -= 1 - nbrTileHeight % 2;
+
+    const auto level = new Level(nbrTileWidth, nbrTileHeight, {
+                                     m_width / 2 - (nbrTileWidth * 48) / 2, m_height / 2 - (nbrTileHeight * 48) / 2
+                                 });
 
     // Game loop
     while (m_isRunning) {
