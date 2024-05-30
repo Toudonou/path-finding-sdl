@@ -5,6 +5,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
+#include "Agent.h"
 #include "Tile.h"
 #include "defines.h"
 
@@ -18,6 +19,10 @@ public:
     void Update();
 
 private:
+
+    Agent *m_agent = nullptr;
+
+    // Level position
     Vector2 m_position{};
 
     // Store the number of tiles by side

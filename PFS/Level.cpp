@@ -9,7 +9,7 @@
 #include "InputManager.h"
 
 
-Level::Level(const int nbrTilesRow,const int nbrTilesColumn, const Vector2 position) {
+Level::Level(const int nbrTilesRow, const int nbrTilesColumn, const Vector2 position) {
     m_position = position;
     m_tilesRow = nbrTilesRow;
     m_tilesColumn = nbrTilesColumn;
@@ -36,11 +36,16 @@ Level::Level(const int nbrTilesRow,const int nbrTilesColumn, const Vector2 posit
             m_tiles[i][j] = new Tile({m_position.x + 48 * i, m_position.y + 48 * j}, TILE::EMPTY);
         }
     }
+
+    //
+    constexpr Vector2 a = {48 / 2 - 19 / 2, 48 / 2 - 19 / 2};
+    m_agent = new Agent(m_tiles[15][10]->GetPosition() + a, 1);
 }
 
 Level::~Level() {
     // TODO: To Improve
     delete [] m_tiles;
+    delete m_agent;
 };
 
 void Level::Update() {
@@ -74,6 +79,9 @@ void Level::Update() {
 
             switch (m_mode) {
                 case MODE::EDIT:
+                    // stop the motion of the agent
+                    m_agent->SetSpeed(0);
+
                     if (tempSprite->GetPosition().x < mousePosition.x && mousePosition.x < tempSprite->GetPosition().x +
                         48 &&
                         tempSprite->GetPosition().y < mousePosition.y && mousePosition.y < tempSprite->GetPosition().
@@ -90,6 +98,9 @@ void Level::Update() {
                     break;
 
                 case MODE::SIMULATION:
+                    // start the motion of the agent
+                    m_agent->SetSpeed(1);
+
                     m_tiles[m_targetIndex.x][m_targetIndex.y]->SetType(TILE::TARGET);
 
                 // To avoid overwriting on the target at the begining of the game
@@ -135,6 +146,20 @@ void Level::Update() {
 
         // tempSprite->Update();
     }
+
+    // Update agent last
+    // Detect the current tile thar conataint the agent
+    const auto [x, y] = m_agent->GetPosition() + Vector2{19 / 2, 19 / 2} - m_position; // Cooooool
+    const int indexX = x / 48;
+    const int indexY = y / 48;
+
+    // Update the direction only if the center of the agent is at the same position as the current tile
+    if (m_tiles[indexX][indexY]->GetPosition() + Vector2{48 / 2, 48 / 2} == m_agent->GetPosition() + Vector2{
+            19 / 2, 19 / 2
+        }) {
+        m_agent->SetDirection(m_tiles[indexX][indexY]->GetDirectionToTarget());
+    }
+    m_agent->Update();
 }
 
 // TODO : Can be improve

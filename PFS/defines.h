@@ -24,6 +24,19 @@ struct Vector2 {
     Vector2 operator+(const Vector2 &other) const {
         return {x + other.x, y + other.y};
     }
+
+    void operator+=(const Vector2 &other) {
+        x += other.x;
+        y += other.y;
+    }
+
+    Vector2 operator-(const Vector2 &other) const {
+        return {x - other.x, y - other.y};
+    }
+
+    Vector2 operator*(const int scalar) const {
+        return {x * scalar, y * scalar};
+    }
 };
 
 enum TILE {
