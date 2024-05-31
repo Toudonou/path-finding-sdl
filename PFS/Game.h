@@ -5,6 +5,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <SDL_render.h>
+#include <SDL_ttf.h>
 
 
 class Game {
@@ -33,6 +34,7 @@ private:
 
     SDL_Window* m_window = nullptr;
     SDL_Renderer *m_render = nullptr;
+    TTF_Font *m_font{};
 
     Game() = default;
 

@@ -31,7 +31,7 @@ void TextureManager::Init(SDL_Renderer *renderer) {
 }
 
 // To get a texture
-SDL_Texture *TextureManager::load(const std::string &file_path) {
+SDL_Texture *TextureManager::LoadImage(const std::string &file_path) {
     if (m_isInitialize == false) {
         SDL_Log("The texture manager must be initialized");
         return nullptr;

@@ -8,6 +8,7 @@
     <excludeRoots>
       <file path="$PROJECT_DIR$/SDL2" />
       <file path="$PROJECT_DIR$/SDL2_image" />
+      <file path="$PROJECT_DIR$/SDL2_ttf" />
     </excludeRoots>
   </component>
 </project>

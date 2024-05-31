@@ -269,6 +269,12 @@ SDL2_INCLUDE_DIR:PATH=E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/include/SD
 //Where the SDL2 Library can be found
 SDL2_LIBRARY:STRING=mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a
 
+//Path to a file.
+SDL2_TTF_INCLUDE_DIR:PATH=E:/Dev/path-finding-sdl/SDL2_ttf/x86_64-w64-mingw32/include/SDL2
+
+//Path to a library.
+SDL2_TTF_LIBRARY:FILEPATH=E:/Dev/path-finding-sdl/SDL2_ttf/x86_64-w64-mingw32/lib/libSDL2_ttf.dll.a
+
 //Value Computed by CMake
 path_findind_sdl_BINARY_DIR:STATIC=E:/Dev/path-finding-sdl/cmake-build-debug
 
@@ -277,6 +283,15 @@ path_findind_sdl_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 path_findind_sdl_SOURCE_DIR:STATIC=E:/Dev/path-finding-sdl
+
+//Value Computed by CMake
+path_finding_sdl_BINARY_DIR:STATIC=E:/Dev/path-finding-sdl/cmake-build-debug
+
+//Value Computed by CMake
+path_finding_sdl_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+path_finding_sdl_SOURCE_DIR:STATIC=E:/Dev/path-finding-sdl
 
 
 ########################
@@ -443,13 +458,15 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 FIND_PACKAGE_MESSAGE_DETAILS_SDL2:INTERNAL=[mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a][E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/include/SDL2][v()]
 //Details about finding SDL2_image
 FIND_PACKAGE_MESSAGE_DETAILS_SDL2_image:INTERNAL=[E:/Dev/path-finding-sdl/SDL2_image/x86_64-w64-mingw32/lib/libSDL2_image.dll.a][E:/Dev/path-finding-sdl/SDL2_image/x86_64-w64-mingw32/include/SDL2][v2.8.2()]
+//Details about finding SDL2_ttf
+FIND_PACKAGE_MESSAGE_DETAILS_SDL2_ttf:INTERNAL=[E:/Dev/path-finding-sdl/SDL2_ttf/x86_64-w64-mingw32/lib/libSDL2_ttf.dll.a][E:/Dev/path-finding-sdl/SDL2_ttf/x86_64-w64-mingw32/include/SDL2][v2.22.0()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: SDL2_IMAGE_INCLUDE_DIR
 SDL2_IMAGE_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SDL2_IMAGE_LIBRARY
 SDL2_IMAGE_LIBRARY-ADVANCED:INTERNAL=1
-SDL2_LIBRARY_TEMP:INTERNAL=mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a
+SDL2_LIBRARY_TEMP:INTERNAL=mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;E:/Dev/path-finding-sdl/SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a
 //linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 

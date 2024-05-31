@@ -39,7 +39,8 @@ Level::Level(const int nbrTilesRow, const int nbrTilesColumn, const Vector2 posi
 
     //
     constexpr Vector2 a = {48 / 2 - 19 / 2, 48 / 2 - 19 / 2};
-    m_agent = new Agent(m_tiles[15][10]->GetPosition() + a, 1);
+    m_agentSpeed = 1;
+    m_agent = new Agent(m_tiles[0][0]->GetPosition() + a, m_agentSpeed);
 }
 
 Level::~Level() {
@@ -99,7 +100,7 @@ void Level::Update() {
 
                 case MODE::SIMULATION:
                     // start the motion of the agent
-                    m_agent->SetSpeed(1);
+                    m_agent->SetSpeed(m_agentSpeed);
 
                     m_tiles[m_targetIndex.x][m_targetIndex.y]->SetType(TILE::TARGET);
 

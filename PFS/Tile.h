@@ -41,7 +41,7 @@ private:
 
     COLOR m_color;
 
-    int m_distanceToTarget;
+    int m_distanceToTarget; // seem useless ???
     Vector2 m_directionToTarget{};
 };
 

@@ -32,8 +32,6 @@ public:
     // Get the position Y position of mouse
     [[nodiscard]] inline int GetMouseY() const { return m_mousePosition.y; }
 
-    // Get the position X position of mouse
-
     // To update keys registers
     void Update();
 

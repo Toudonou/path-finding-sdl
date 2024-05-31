@@ -21,6 +21,7 @@ public:
 private:
 
     Agent *m_agent = nullptr;
+    int m_agentSpeed;
 
     // Level position
     Vector2 m_position{};

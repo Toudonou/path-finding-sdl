@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 
     Game *game = Game::GetInstance();
 
-    game->Init(700, 700);
+    game->Init(1280, 780);
     game->Run();
     game->Quit();
 

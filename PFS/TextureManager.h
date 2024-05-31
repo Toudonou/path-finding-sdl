@@ -18,7 +18,7 @@ public:
     void Init(SDL_Renderer *renderer);
 
     // To get a texture
-    SDL_Texture *load(const std::string &file_path);
+    SDL_Texture *LoadImage(const std::string &file_path);
 
     // For cleaning up everythings
     void Quit();
