@@ -6,7 +6,6 @@
 
 #include <ctime>
 #include <SDL.h>
-#include <SDL_ttf.h>
 
 #include "InputManager.h"
 #include "Level.h"
@@ -58,15 +57,6 @@ void Game::Init(const int windowWidth, const int windowHeight) {
     // Initialize the texture manager before the renderer manager
     RendererManager::GetInstance()->Init(m_render);
     InputManager::GetInstance()->Init();
-
-    // TODO : Should be improve
-    if (TTF_Init() == -1) {
-        SDL_Log("Error: Couldn't initialize TTF = %s", SDL_GetError());
-    }
-    m_font = TTF_OpenFont(R"(E:\Dev\path-finding-sdl\assets\Fira Code Regular Nerd Font Complete.ttf)", 25);
-    if (m_font == nullptr) {
-        SDL_Log("Failed to load font! TTF_Error: %s\n", TTF_GetError());
-    }
 }
 
 void Game::Run() {
@@ -85,13 +75,6 @@ void Game::Run() {
                                      m_width / 2 - (nbrTileWidth * 48) / 2, m_height / 2 - (nbrTileHeight * 48) / 2
                                  });
 
-    // constexpr SDL_Color textColor = {255, 255, 255, 255};
-    // SDL_Surface *textSurface = nullptr;
-    // SDL_Texture *textTexture = nullptr;
-    // SDL_Rect textRect;
-    // int count = 0;
-    // std::string fps;
-
     // Game loop
     while (m_isRunning) {
         clock_t time_req = clock();
@@ -104,21 +87,7 @@ void Game::Run() {
 
         time_req = clock() - time_req;
 
-        // TODO : Should be re-think
-        // Render text texture
-        // if (count++ % 10 == 0) {
-        //     fps = "FPS : ";
-        //     fps += std::to_string(1000 / time_req);
-        // }
     }
-
-    // textSurface = TTF_RenderText_Solid(m_font, fps.c_str(), {255, 255, 255, 255});
-    // textRect = {10, 10, textSurface->w, textSurface->h};
-    // textTexture = SDL_CreateTextureFromSurface(m_render, textSurface);
-    // SDL_RenderCopy(m_render, textTexture, nullptr, &textRect);
-    // SDL_RenderPresent(m_render);
-    // SDL_DestroyTexture(textTexture);
-    // SDL_FreeSurface(textSurface);
 
     delete level;
 }
@@ -140,9 +109,6 @@ void Game::Quit() {
     // Quit the renderer manager before the texture manager
     RendererManager::GetInstance()->Quit();
     TextureManager::GetInstance()->Quit();
-
-    TTF_CloseFont(m_font);
-    TTF_Quit();
 
     // Free allocated elements
     SDL_DestroyRenderer(m_render);

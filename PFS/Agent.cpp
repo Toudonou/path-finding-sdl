@@ -9,7 +9,7 @@
 Agent::Agent(const Vector2 position, const int speed) {
     m_position = position;
     m_speed = speed;
-    m_sprite = new Sprite(R"(E:\Dev\path-finding-sdl\assets\unit.bmp)", m_position);
+    m_sprite = new Sprite(getCurrentWorkingDirectory() + R"(\assets\unit.bmp)", m_position);
 
     m_currentDirection = Vector2::ZERO;
     RendererManager::GetInstance()->AddSprite(m_sprite);

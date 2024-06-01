@@ -54,5 +54,6 @@ enum MODE {
 // To generate a random string, especially for the IDs of our components
 std::string randomStringGenerator(int stringLength = 26);
 
+std::string getCurrentWorkingDirectory();
 
 #endif //VECTOR2_H

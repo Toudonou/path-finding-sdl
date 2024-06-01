@@ -1,13 +1,15 @@
-# Project Title
+# Pathfinding with SDL2
 
-A brief description of what this project does and who it's for.
+A simple SDL project simulating a path finding algorithm in a 2D environment
+
+## Preview
+![img.png](img.png)
 
 ## How to Run
 
-1. Ensure you have SDL installed on your system.
-2. Clone the repository.
-3. Open the project in CLion 2024.1.1 or any other C++ IDE that supports CMake.
-4. Build and run the project.
+1. Clone the repository.
+2. Open the project in CLion 2024.1.1 or any other C++ IDE that supports CMake.
+3. Build and run the project.
 
 ## Features
 

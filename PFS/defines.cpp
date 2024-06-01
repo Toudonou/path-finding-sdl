@@ -4,6 +4,10 @@
 
 #include "defines.h"
 
+#include <direct.h> // For _getcwd
+#include <cstdio> // For FILENAME_MAX
+#include <filesystem>
+
 Vector2 Vector2::ZERO = {0, 0};
 Vector2 Vector2::UP = {0, -1};
 Vector2 Vector2::DOWN = {0, 1};
@@ -20,4 +24,8 @@ std::string randomStringGenerator(const int stringLength) {
         result += characters[rand() % charactersLength];
     }
     return result;
+}
+
+std::string getCurrentWorkingDirectory() {
+    return std::filesystem::current_path().parent_path().string();
 }
